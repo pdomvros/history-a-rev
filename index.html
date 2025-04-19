@@ -1,1 +1,243 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Επανάληψη της Ιστορίας Α’ Γυμνασίου</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
 
+  <style>
+    body {
+      margin: 20px;
+      background-color: #000;
+      color: gold;
+      font-family: 'Comfortaa', sans-serif;
+      text-align: justify;
+      line-height: 1.8;
+      font-size: 110%;
+    }
+
+    h1, h2, h3, p {
+      margin: 0 0 10px 0;
+    }
+
+    .header-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header-container h1 {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .header-container h2 {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .creator, .director {
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    details {
+      margin: 15px 0;
+      padding: 10px;
+      border: 2px solid gold;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: transparent;
+    }
+    summary {
+      font-size: 1.1em;
+      outline: none;
+    }
+
+    .general, .history { background-color: transparent; }
+    .bronze-age { background-color: #b87333; }
+    .archaic-age { background-color: #8b4513; }
+    .athens-hegemony { background-color: #c71585; }
+    .hegemonic-rivalries { background-color: #800080; }
+    .macedonian-growth { background-color: #2e8b57; }
+    .classical-arts { background-color: #4682b4; }
+    .hellenistic-kingdoms { background-color: #4b0082; }
+
+    .sample-button, .info-button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 15px;
+      font-size: 0.9em;
+      font-weight: bold;
+      border: 2px solid gold;
+      background: transparent;
+      color: gold;
+      cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none; 
+    }
+    .sample-button:hover, .info-button:hover {
+      background: gold;
+      color: black;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+      background-color: #333; 
+      color: gold;
+      margin: 10% auto;
+      padding: 20px;
+      border: 2px solid gold;
+      width: 80%;
+      max-width: 700px;
+      border-radius: 8px;
+    }
+    .close-btn {
+      float: right;
+      font-size: 1.2em;
+      font-weight: bold;
+      border: 2px solid gold;
+      background: transparent;
+      color: gold;
+      cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none;
+      margin: -5px 0 10px 10px;
+    }
+    .close-btn:hover {
+      background: gold;
+      color: black;
+    }
+    .modal p {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-container">
+    <h1>1ο Γυμνάσιο Πυλαίας</h1>
+    <h2>Επανάληψη της Ιστορίας Α' Γυμνασίου</h2>
+    <div class="creator">Δημιουργία/Επιμέλεια: Παναγιώτης Δόμβρος (CC BY-NC)</div>
+    <div class="director">Διευθυντής 1ου Γυμνασίου Πυλαίας</div>
+  </div>
+
+  <details class="history">
+    <summary>Γενικές Πληροφορίες 🏛️⏳📜</summary>
+    <p><strong>Α Μέρος:</strong> Πέντε ισοδύναμα ερωτήματα εκ των οποίων απαντούν τα τρία.</p>
+    <p><strong>Β Μέρος:</strong> Τέσσερα ισοδύναμα ερωτήματα εκ των οποίων απαντούν τα δύο.</p>
+
+    <button
+      class="sample-button"
+      onclick="window.open('https://drive.google.com/file/d/1314RSVUjXOGNPGbIn5WB-ZHZANasQW4K/view?usp=sharing', '_blank')">
+      Δείγμα
+    </button>
+
+    <button class="info-button" onclick="openModal()">Διευκρινίσεις</button>
+
+    <button
+      class="info-button"
+      onclick="window.open('https://eclass11.sch.gr/modules/ebook/show.php/1901051468/4004172/4005336,4007391/unit=4241792', '_blank')">
+      Σχεδιαγράμματα Α Γυμνασίου
+    </button>
+  </details>
+
+  <div id="historyModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">Κλείσιμο</button>
+      <h3 style="margin-top: 0;">Διευκρινήσεις</h3>
+      <p>Στην Α' Ομάδα μπορεί να υπάρχουν ερωτήσεις:</p>
+      <ul>
+        <li>α) ανάλυσης ιστορικών όρων</li>
+        <li>β) αντιστοίχισης</li>
+        <li>γ) Σωστού ή Λάθους / συμπλήρωσης κενού</li>
+        <li>δ) σχολιασμού ιστορικής πηγής</li>
+      </ul>
+      <p>Στη Β' Ομάδα μπορεί να υπάρχουν ερωτήσεις:</p>
+      <ul>
+        <li>α) Συσχέτισης γνώσεων με πηγές</li>
+        <li>β) Σχολιασμού εικόνας, χάρτη κ.λπ.</li>
+        <li>γ) Ανάγνωσης υποκειμενικότητας</li>
+        <li>δ) Σύγκρισης δράσης ιστορικών προσώπων</li>
+      </ul>
+    </div>
+  </div>
+
+  <details class="bronze-age">
+    <summary>Εποχή του Χαλκού 🏺🔨</summary>
+    <div style="text-align: center; margin-top: 15px;">
+      <button class="sample-button" onclick="window.open('https://pdomvros.github.io/bronze-era/', '_blank')">Ανοιγμα Κουίζ</button>
+    </div>
+  </details>
+
+  <details class="archaic-age">
+    <summary>Αρχαϊκή Εποχή ⚖️🛡️</summary>
+    <div style="text-align: center; margin-top: 15px;">
+      <button class="sample-button" onclick="window.open('https://pdomvros.github.io/archaic-era/', '_blank')">Ανοιγμα Κουίζ</button>
+    </div>
+  </details>
+
+  <details class="athens-hegemony">
+    <summary>Η Ηγεμονία της Αθήνας 🏙️⚔️</summary>
+    <div style="text-align: center; margin-top: 15px;">
+      <button class="sample-button" onclick="window.open('https://pdomvros.github.io/athens-rule/', '_blank')">Ανοιγμα Κουίζ</button>
+    </div>
+  </details>
+
+  <details class="hegemonic-rivalries">
+    <summary>Ηγεμονικοί Ανταγωνισμοί και η Κάμψη των Ελληνικών Πόλεων ⚔️🏛️</summary>
+    <div style="text-align: center; margin-top: 15px;">
+      <button class="sample-button" onclick="window.open('https://pdomvros.github.io/fall-citystates/', '_blank')">Ανοιγμα Κουίζ</button>
+    </div>
+  </details>
+
+  <details class="macedonian-growth">
+    <summary>Η Ανάπτυξη της Μακεδονίας 🏰💪</summary>
+    <div style="text-align: center; margin-top: 15px;">
+      <button class="sample-button" onclick="window.open('https://pdomvros.github.io/macedonia/', '_blank')">Ανοιγμα Κουίζ</button>
+    </div>
+  </details>
+
+  <details class="classical-arts">
+    <summary>Οι τέχνες και τα γράμματα στην Κλασική Εποχή 🎨📚</summary>
+    <div style="text-align: center; margin-top: 15px;">
+      <button class="sample-button" onclick="window.open('https://pdomvros.github.io/classical-era-revision/', '_blank')">Ανοιγμα Κουίζ</button>
+    </div>
+  </details>
+
+  <details class="hellenistic-kingdoms">
+    <summary>Τα Ελληνιστικά Βασίλεια και η κατάσταση στον Ελλαδικό Χώρο 🌍👑</summary>
+    <div style="text-align: center; margin-top: 15px;">
+      <button class="sample-button" onclick="window.open('https://pdomvros.github.io/hellenistic-era/', '_blank')">Ανοιγμα Κουίζ</button>
+    </div>
+  </details>
+
+  <script>
+    var modal = document.getElementById("historyModal");
+
+    function openModal() {
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+</html>
